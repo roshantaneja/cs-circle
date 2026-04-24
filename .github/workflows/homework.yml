@@ -1,0 +1,37 @@
+name: Homework Tests
+
+on:
+  push:
+    branches: [devarshi, priansh]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Pick student from branch name
+        id: student
+        run: |
+          NAME="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
+          if [[ "$NAME" != "devarshi" && "$NAME" != "priansh" ]]; then
+            echo "Branch '$NAME' is not a student branch — skipping." >&2
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run homework tests
+        if: steps.student.outputs.skip != 'true'
+        env:
+          STUDENT: ${{ steps.student.outputs.name }}
+        run: pytest tests/ -v
