@@ -1,68 +1,88 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+# Homework 1 — Dictionaries and Stacks
+# Fill in each function/method below. Do not change any function signatures.
+# Run your tests with: ./check.sh priansh
+
+# ── PART 1: DICTIONARIES ────────────────────────────────────────────────────
+
+def word_count(words):
+    """Given a list of words, return a dict mapping each word to the number
+    of times it appears.
+
+    Examples:
+        word_count(["apple", "banana", "apple", "cherry", "banana", "apple"])
+        → {"apple": 3, "banana": 2, "cherry": 1}
+
+        word_count([])
+        → {}
+    """
+    pass
 
 
-class LinkedList:
+def flip(d):
+    """Given a dictionary, return a new dict with keys and values swapped.
+    You can assume all values are unique (no two keys share the same value).
+
+    Examples:
+        flip({"a": 1, "b": 2, "c": 3})
+        → {1: "a", 2: "b", 3: "c"}
+
+        flip({})
+        → {}
+    """
+    pass
+
+
+# ── PART 2: STACKS ──────────────────────────────────────────────────────────
+
+class Stack:
+    """A last-in, first-out (LIFO) stack backed by a Python list.
+
+    Think of it like a stack of plates — you always add and remove from the top.
+    """
+
     def __init__(self):
-        self.head = None
+        self._data = []  # store items here — don't add other instance variables
 
-    def addToFront(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
-
-    def removeFromFront(self):
-        if self.head is None:
-            return None
-
-        removed = self.head
-        self.head = self.head.next
-        return removed.data
-
-    def printList(self):
-        current = self.head
-        while current:
-            print(current.data, end=" -> ")
-            current = current.next
-        print("None")
-
-    # This method should insert a new node as the second element in the list.
-    def addSecond(self, data):
-        # Fill this out!
-        # running addSecond(10)
-        # 5 -> 3 -> 8 -> None should become 5 -> 10 -> 3 -> 8 -> None
-        # if the list is empty: then it becomes 10 -> None
-        # if the list has one element like 5 -> None it becomes 5 -> 10 -> None
+    def push(self, item):
+        """Add item to the top of the stack."""
         pass
 
-    # This method should remove and return the second node's data.
-    def removeSecond(self):
-        # Fill this out!
-        # running removeSecond() on 5 -> 10 -> 3 -> 8 -> None
-        # should return 10 and leave the list as 5 -> 3 -> 8 -> None
-        # if the list has 0 or 1 elements, return None and leave it unchanged.
+    def pop(self):
+        """Remove and return the top item.
+        Raise IndexError("pop from empty stack") if the stack is empty.
+        """
+        pass
+
+    def peek(self):
+        """Return the top item without removing it.
+        Raise IndexError("peek at empty stack") if the stack is empty.
+        """
+        pass
+
+    def is_empty(self):
+        """Return True if the stack has no items, False otherwise."""
+        pass
+
+    def size(self):
+        """Return the number of items in the stack."""
         pass
 
 
-# after implementing the methods, these should work
-if __name__ == "__main__":
-    ll = LinkedList()
+def is_balanced(s):
+    """Return True if every opening bracket in s has a matching closing
+    bracket in the correct order, False otherwise.
 
-    ll.addToFront(8)
-    ll.addToFront(3)
-    ll.addToFront(5)
+    Only these bracket pairs count: () [] {}
+    All other characters should be ignored.
 
-    ll.printList()
-    # 5 -> 3 -> 8 -> None
+    Hint: use your Stack class above.
 
-    ll.addSecond(10)
-    ll.printList()
-    # 5 -> 10 -> 3 -> 8 -> None
-
-    print(ll.removeSecond())
-    # 10
-
-    ll.printList()
-    # 5 -> 3 -> 8 -> None
+    Examples:
+        is_balanced("([]{})")  → True
+        is_balanced("([)]")    → False
+        is_balanced("")        → True
+        is_balanced("hello")   → True   (no brackets — trivially balanced)
+        is_balanced("(")       → False
+        is_balanced(")")       → False
+    """
+    pass
